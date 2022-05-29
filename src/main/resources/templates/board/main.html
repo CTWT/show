@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns xmlns:th="http://www.w3.org/1999/xhtml" : th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    <script src="js/vendor/modernizr-3.8.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="@{/js/vendor/jquery-3.4.1.min.js}"><\/script>')</script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <th>글번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>조회수</th>
+            </thead>
+            <tr th:each="list : ${list}">
+                <td>[[${list.boardId}]]</td>
+                <td>[[${list.name}]]</td>
+                <td>
+                    <a th:href="@{board/view(boardId=${list.boardId})}"> [[${list.title}]]</a>
+                </td>
+                <td>[[${list.read}]]</td>
+            </tr>
+        </table>
+        <button id="inputBtn" class="btn btn-danger btn-sm float-right">글쓰기</button>
+    </div>
+
+    <script th:inline="javascript">
+        $(document).on('ready', function (e) {
+            $(document).on('click', '#inputBtn', function (e) {
+               $(location).attr("href", "upload")
+            })
+        })
+
+    </script>
+</body>
+</html>
