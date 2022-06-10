@@ -1,6 +1,7 @@
 package board.show.mapper;
 
 import board.show.domain.Board;
+import board.show.domain.Criteria;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,6 +11,8 @@ public interface BoardMapper {
     int boardCount();
 
     List<Board> getList();
+
+    List<Board> getListWithPaging(Criteria cri);
 
     Board getBoard(Long boardId);
 

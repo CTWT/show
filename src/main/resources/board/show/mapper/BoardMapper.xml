@@ -25,4 +25,12 @@
     <delete id="deleteBoard" parameterType="Long">
         DELETE FROM tbl_board WHERE boardId=#{boardId};
     </delete>
+
+    <select id="getListWithPaging" resultType="board.show.domain.Criteria">
+        SELECT boardId, title, content, name, read  FROM (SELECT @GROWNUP := @GROWNUP + 1 as rnum, boardId, title, content, name, read
+        FROM tbl_board, (SELECT @GROWNUP := 0) A
+        ORDER BY boardId desc) RESULT
+        WHERE rnum > (#{pageNum} -1) * #{amouont}
+        LIMIT #{amount};
+    </select>
 </mapper>
